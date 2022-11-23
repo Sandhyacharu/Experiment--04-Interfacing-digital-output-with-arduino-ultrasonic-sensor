@@ -55,39 +55,45 @@ speed of sound in the air at 20ºC (68ºF) = 343m/s
 
 
 ### PROGRAM 
+```python3
+#define echoPin 2 // attach pin D2 Arduino to pin Echo of HC-SR04
+#define trigPin 3 //attach pin D3 Arduino to pin Trig of HC-SR04
 
+// defines variables
+long duration; // variable for the duration of sound wave travel
+int distance; // variable for the distance measurement
 
+void setup() {
+  pinMode(trigPin, OUTPUT); // Sets the trigPin as an OUTPUT
+  pinMode(echoPin, INPUT); // Sets the echoPin as an INPUT
+  Serial.begin(9600); // // Serial Communication is starting with 9600 of baudrate speed
+  Serial.println("Ultrasonic Sensor HC-SR04 Test"); // print some text in Serial Monitor
+  Serial.println("with Arduino UNO R3");
+}
+void loop() {
+  // Clears the trigPin condition
+  digitalWrite(trigPin, LOW);
+  delayMicroseconds(2);
+  // Sets the trigPin HIGH (ACTIVE) for 10 microseconds
+  digitalWrite(trigPin, HIGH);
+  delayMicroseconds(10);
+  digitalWrite(trigPin, LOW);
+  // Reads the echoPin, returns the sound wave travel time in microseconds
+  duration = pulseIn(echoPin, HIGH);
+  // Calculating the distance
+  distance = duration * 0.034 / 2; // Speed of sound wave divided by 2 (go and back)
+  // Displays the distance on the Serial Monitor
+  Serial.print("Distance: ");
+  Serial.print(distance);
+  Serial.println(" cm");
+}
+```
+### OUTPUT
 
+![image](https://user-images.githubusercontent.com/75235167/203575713-aa5be5b8-ccbe-4490-a72a-51ec927e2e0f.png)
 
-
-
-### Distance vs measurement table 
-
-			
- 
-			
-			
-			
-
-![image](https://user-images.githubusercontent.com/36288975/190135379-52ebacd5-ccd5-460f-a4cd-4d0ad1d9b179.png)
-
-			
-			
-			
-			
-			
-			Average error = sum/ number of readings 
- 
-
-
-
-
-
-
-
+![image](https://user-images.githubusercontent.com/75235167/203575945-c678a5a1-c3c8-4b20-a825-1e4d074baecb.png)
 
 ### RESULTS
 
-
-
- 
+Arduino uno is interfaced with FSR and output values are indicated on a graph.
